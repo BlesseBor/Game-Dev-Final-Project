@@ -20,6 +20,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameManager gameManager;
 
     [SerializeField] private float extraJumps;
+
+     // Boundary limits
+    [SerializeField] private float minX = -10f;
+    [SerializeField] private float maxX = 10f;
+    [SerializeField] private float minY = -5f;
+    [SerializeField] private float maxY = 5f;
     private float jumpCounter;
     // private bool isOnGround = false;
     void Start()
@@ -55,6 +61,9 @@ public class PlayerController : MonoBehaviour
             if(verticalInput<-0.01f){
                 body.velocity = new Vector2(body.velocity.x, -jumpForce);
             }
+
+             // Clamp the player's position within the screen boundaries
+            ClampPosition();
         }
     }
 
@@ -123,11 +132,11 @@ public class PlayerController : MonoBehaviour
     }
 
 
-     void OnCollisionEnter2D(Collision2D other)
+    private void ClampPosition()
     {
-        if (other.gameObject.CompareTag("Box"))
-        {
-        //    IsGrounded().SetBool(true);
-        }
+        Vector3 clampedPosition = transform.position;
+        clampedPosition.x = Mathf.Clamp(clampedPosition.x, minX, maxX);
+        clampedPosition.y = Mathf.Clamp(clampedPosition.y, minY, maxY);
+        transform.position = clampedPosition;
     }
 }

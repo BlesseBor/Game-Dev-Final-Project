@@ -8,9 +8,11 @@ public class Timer : MonoBehaviour
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private TextMeshProUGUI timeTakenText;
     private float timeElapsed=0f;
+    [SerializeField] private float timeRemaining = 120f; // 2 minutes
     void Start()
     {
-        timerText.text = "  TIME ELAPSED: <color=#00BF63>{0:00}:{1:00}" + timeElapsed;
+        // timerText.text = "  TIME ELAPSED: <color=#00BF63>{0:00}:{1:00}" + timeElapsed;
+        UpdateTimerText(timeRemaining);
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
     }
@@ -22,10 +24,11 @@ public class Timer : MonoBehaviour
             // if (timeRemaining > 0)
             // {
 
-                timeElapsed += UnityEngine.Time.deltaTime;
-                // timerText.text = "  TIME ELAPSED: " + DisplayTime(timeElapsed);
-                DisplayTime(timeElapsed);
-                DisplayTimeTaken(timeElapsed);
+                // timeElapsed += UnityEngine.Time.deltaTime;
+                // // timerText.text = "  TIME ELAPSED: " + DisplayTime(timeElapsed);
+                // DisplayTime(timeElapsed);
+                // DisplayTimeTaken(timeElapsed);
+
                 // timeTakenText.text = "TIME TAKEN:  color=#00BF63>{0:00}:{1:00}" + timeElapsed;
 
             // }
@@ -34,24 +37,37 @@ public class Timer : MonoBehaviour
             // {
                 // gameManager.DisplayGameOver();
             // }
+
+            if (timeRemaining > 0)
+            {
+                timeRemaining -= UnityEngine.Time.deltaTime;
+                UpdateTimerText(timeRemaining);
+            }
+            else
+            {
+                timeRemaining = 0;
+                UpdateTimerText(timeRemaining);
+                gameManager.DisplayGameOver();
+            }
+
+            DisplayTimeTaken(120f - timeRemaining);
+        
         }
     }
 
-    void DisplayTime(float timeToDisplay)
+    void UpdateTimerText(float timeToDisplay)
     {
-        timeToDisplay+=1;
-        float minutes = Mathf.FloorToInt(timeToDisplay / 60);  
+        float minutes = Mathf.FloorToInt(timeToDisplay / 60);
         float seconds = Mathf.FloorToInt(timeToDisplay % 60);
 
-        timerText.text = string.Format("  TIME ELAPSED: <color=#00BF63>{0:00}:{1:00}", minutes, seconds);
+        timerText.text = string.Format("  TIME REMAINING: <color=#00BF63>{0:00}:{1:00}</color>", minutes, seconds);
     }
 
     void DisplayTimeTaken(float timeToDisplay)
     {
-        timeToDisplay+=1;
-        float minutes = Mathf.FloorToInt(timeToDisplay / 60);  
+        float minutes = Mathf.FloorToInt(timeToDisplay / 60);
         float seconds = Mathf.FloorToInt(timeToDisplay % 60);
 
-        timeTakenText.text = string.Format("TIME TAKEN:  <color=#00BF63>{0:00}:{1:00}", minutes, seconds);
+        timeTakenText.text = string.Format("TIME TAKEN:  <color=#00BF63>{0:00}:{1:00}</color>", minutes, seconds);
     }
 }

@@ -8,12 +8,13 @@ TagManager:
   - Checkpoint
   - State-Driven Camera
   - State-Driven Camera2
-  - Box
+  - Player1
+  - Player2
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Foreground
   - Water
   - UI
   - Ground
@@ -45,4 +46,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Front
+    uniqueID: 1206527193
+    locked: 0
+  - name: Back
+    uniqueID: 997054023
     locked: 0

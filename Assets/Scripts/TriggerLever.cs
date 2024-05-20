@@ -25,7 +25,7 @@ public class TriggerLever : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // When the player enters the trigger zone, set the flag to true
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player1"))
         {
             isPlayerInRange = true;
             Debug.Log("Player entered trigger zone");
@@ -35,7 +35,7 @@ public class TriggerLever : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         // When the player exits the trigger zone, reset the flag to false
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player1"))
         {
             isPlayerInRange = false;
             Debug.Log("Player exited trigger zone");

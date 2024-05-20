@@ -21,7 +21,7 @@ public class Orbs : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("Obtained Orb");
-        if(collision.tag == "Player")
+        if(collision.tag == "Player1")
         {
             // collision.GetComponent<Health>().TakeDamage(damage);
             GameObject.Find("ScoreManager").GetComponent<ScoreManager>().UpdateScore(scoreValue); // update score when clicked

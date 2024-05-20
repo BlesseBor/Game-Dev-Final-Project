@@ -28,14 +28,14 @@ public class Health : MonoBehaviour
         currentHealth = Mathf.Clamp(currentHealth - _damage, 0, startingHealth);
         if (currentHealth > 0)
         {
-            playerAnimator.SetTrigger("Hurt");
+            playerAnimator.SetTrigger("isHurt");
             Debug.Log("Hurt");
         }
         else
         {
             if(!dead)
             {
-                // playerAnimator.SetTrigger("Die");
+                playerAnimator.SetTrigger("isDead");
                 GetComponent<PlayerController>().enabled = false;
                 dead = true;
 

@@ -20,9 +20,10 @@ public class FallSensor : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("Player Fell");
-        if(collision.tag == "Player")
+        if(collision.tag == "Player1" || collision.tag == "Player2")
         {
             collision.GetComponent<Health>().TakeDamage(damage);
+            // Destroy(collision.gameObject);
         }
     }
 }
